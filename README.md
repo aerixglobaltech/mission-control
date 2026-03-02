@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.2.0-blue?style=flat-square" alt="Version" />
+  <img src="https://img.shields.io/badge/version-1.3.0-blue?style=flat-square" alt="Version" />
   <img src="https://img.shields.io/badge/Next.js-14-black?style=flat-square&logo=next.js" alt="Next.js" />
   <img src="https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript" />
   <img src="https://img.shields.io/badge/SQLite-3-003B57?style=flat-square&logo=sqlite&logoColor=white" alt="SQLite" />
@@ -356,6 +356,25 @@ mission-control/
 lsof -i :4000
 kill -9 <PID>
 ```
+<details>
+<summary><strong>Agent callbacks failing behind a proxy (502 errors)</strong></summary>
+
+If you're behind an HTTP proxy (corporate VPN, Hiddify, etc.), agent callbacks to `localhost` may fail because the proxy intercepts local requests.
+
+**Fix:** Set `NO_PROXY` so localhost bypasses the proxy:
+
+```bash
+# Linux / macOS
+export NO_PROXY=localhost,127.0.0.1
+
+# Windows (cmd)
+set NO_PROXY=localhost,127.0.0.1
+
+# Docker
+docker run -e NO_PROXY=localhost,127.0.0.1 ...
+```
+
+See [Issue #30](https://github.com/crshdn/mission-control/issues/30) for details.
 </details>
 
 ---
@@ -463,6 +482,36 @@ Mission Control is built by a growing community. Thank you to everyone who has c
         <sub><b>nice-and-precise</b></sub>
       </a><br />
       <sub>Agent Protocol Docs</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/JamesCao2048">
+        <img src="https://github.com/JamesCao2048.png?size=80" width="80" height="80" style="border-radius:50%" alt="JamesCao2048" /><br />
+        <sub><b>JamesCao2048</b></sub>
+      </a><br />
+      <sub>Task Creation Fix</sub>
+    </td>
+    <td align="center">
+      <a href="https://github.com/davetha">
+        <img src="https://github.com/davetha.png?size=80" width="80" height="80" style="border-radius:50%" alt="davetha" /><br />
+        <sub><b>davetha</b></sub>
+      </a><br />
+      <sub>Force-Dynamic & Model Discovery</sub>
+    </td>
+    <td align="center">
+      <a href="https://github.com/pkgaiassistant-droid">
+        <img src="https://github.com/pkgaiassistant-droid.png?size=80" width="80" height="80" style="border-radius:50%" alt="pkgaiassistant-droid" /><br />
+        <sub><b>pkgaiassistant-droid</b></sub>
+      </a><br />
+      <sub>Activity Dashboard & Mobile UX</sub>
+    </td>
+    <td align="center">
+      <a href="https://github.com/Coder-maxer">
+        <img src="https://github.com/Coder-maxer.png?size=80" width="80" height="80" style="border-radius:50%" alt="Coder-maxer" /><br />
+        <sub><b>Coder-maxer</b></sub>
+      </a><br />
+      <sub>Static Route Fix</sub>
     </td>
   </tr>
 </table>
