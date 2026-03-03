@@ -156,12 +156,21 @@ export async function GET(request: NextRequest) {
         // Fallback to local FS on any error
         if (err.code !== 'NotFound' && err.code !== 'NoSuchKey') {
            console.error('[MINIO DOWNLOAD] Error fetching object:', err);
+           return NextResponse.json({ error: 'MinIO Fetch Error: ' + err.message }, { status: 500 });
         }
       }
+    } else if (objectKey && !minioClient) {
+       console.warn('[MINIO DOWNLOAD] Missing MinIO configuration. MINIO_PRIVATE_ENDPOINT/MINIO_PUBLIC_ENDPOINT or ACCESS_KEY/SECRET_KEY not set.');
     }
 
     // Check file exists locally
     if (!existsSync(targetPath)) {
+      if (!minioClient && objectKey) {
+         return NextResponse.json(
+           { error: 'File not found locally, and MinIO integration is missing environment variables (MINIO_PUBLIC_ENDPOINT, etc.) in Mission Control.' },
+           { status: 404 }
+         );
+      }
       return NextResponse.json(
         { error: 'File not found in MinIO or locally' },
         { status: 404 }
