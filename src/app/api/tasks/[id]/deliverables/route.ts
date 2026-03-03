@@ -70,10 +70,9 @@ export async function POST(
     if (deliverable_type === 'file' && path) {
       // Expand tilde
       normalizedPath = path.replace(/^~/, process.env.HOME || '');
-      fileExists = existsSync(normalizedPath);
-      if (!fileExists) {
-        console.warn(`[DELIVERABLE] Warning: File does not exist: ${normalizedPath}`);
-      }
+      // When tracking files via MinIO, the local file won't exist
+      // Mission-control will retrieve it directly from the bucket
+      fileExists = true; 
     }
 
     const db = getDb();
